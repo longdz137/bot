@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TAI XIU • SIC BO • CASINO</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0c29, #1a1a2e, #16213e);
+            min-height: 100vh;
+            color: #fff;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        .bg-orb {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 215, 0, 0.15), transparent 70%);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+            filter: blur(60px);
+            z-index: 0;
+            animation: float 20s infinite alternate;
+        }
+
+        .bg-orb-2 {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle at 70% 70%, rgba(0, 255, 255, 0.1), transparent 70%);
+            border-radius: 50%;
+            bottom: -150px;
+            left: -150px;
+            filter: blur(80px);
+            z-index: 0;
+            animation: float 25s infinite alternate-reverse;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 50px) scale(1.2); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 16px;
+            padding-bottom: 100px;
+        }
+
+        /* Glassmorphism header */
+        .header {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .balance-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .balance-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .balance-label i {
+            color: #fbbf24;
+            font-size: 18px;
+        }
+
+        .balance-value {
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 600;
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .user-details {
+            flex: 1;
+        }
+
+        .user-name {
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .user-id {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .level-badge {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            padding: 6px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #000;
+        }
+
+        /* Dice Section - 3D Style */
+        .dice-section {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 40px;
+            padding: 25px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dice-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.5), transparent);
+        }
+
+        .dice-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin: 20px 0;
+            perspective: 1000px;
+        }
+
+        .dice-3d {
+            width: 90px;
+            height: 90px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.1s;
+        }
+
+        .dice-3d[data-value="1"] { transform: rotateX(0deg) rotateY(0deg); }
+        .dice-3d[data-value="2"] { transform: rotateX(0deg) rotateY(-90deg); }
+        .dice-3d[data-value="3"] { transform: rotateX(0deg) rotateY(90deg); }
+        .dice-3d[data-value="4"] { transform: rotateX(90deg) rotateY(0deg); }
+        .dice-3d[data-value="5"] { transform: rotateX(-90deg) rotateY(0deg); }
+        .dice-3d[data-value="6"] { transform: rotateX(0deg) rotateY(180deg); }
+
+        .face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #fff, #f0f0f0);
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: inset 0 -5px 0 rgba(0,0,0,0.1), 0 10px 20px rgba(0,0,0,0.3);
+            backface-visibility: visible;
+        }
+
+        .face-1 { transform: translateZ(45px); }
+        .face-2 { transform: rotateY(90deg) translateZ(45px); }
+        .face-3 { transform: rotateY(-90deg) translateZ(45px); }
+        .face-4 { transform: rotateX(90deg) translateZ(45px); }
+        .face-5 { transform: rotateX(-90deg) translateZ(45px); }
+        .face-6 { transform: rotateY(180deg) translateZ(45px); }
+
+        .dot-3d {
+            width: 16px;
+            height: 16px;
+            background: radial-gradient(circle at 30% 30%, #1a1a2e, #000);
+            border-radius: 50%;
+            box-shadow: inset -2px -2px 4px rgba(0,0,0,0.5);
+        }
+
+        .face-1 .dot-3d { background: radial-gradient(circle at 30% 30%, #fbbf24, #f59e0b); }
+
+        .total-badge {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .total-number {
+            font-size: 48px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(251, 191, 36, 0.5);
+        }
+
+        .result-badge-modern {
+            display: inline-block;
+            padding: 12px 40px;
+            border-radius: 50px;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-badge-modern.tai {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            box-shadow: 0 10px 30px rgba(239, 68, 68, 0.4);
+        }
+
+        .result-badge-modern.xiu {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+        }
+
+        .result-badge-modern::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            20% { transform: translateX(100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        /* Betting Controls - Modern Style */
+        .betting-controls {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section-title-modern {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-title-modern i {
+            color: #fbbf24;
+        }
+
+        .amount-control {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .amount-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 15px;
+            border: none;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #000;
+            font-size: 24px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 5px 15px rgba(251, 191, 36, 0.3);
+        }
+
+        .amount-btn:active {
+            transform: scale(0.9);
+            box-shadow: 0 2px 10px rgba(251, 191, 36, 0.2);
+        }
+
+        .amount-input {
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+            background: transparent;
+            border: none;
+            text-align: center;
+            width: 150px;
+        }
+
+        .quick-bets {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .quick-bet-modern {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 12px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            backdrop-filter: blur(5px);
+        }
+
+        .quick-bet-modern:hover {
+            background: rgba(251, 191, 36, 0.2);
+            border-color: #fbbf24;
+        }
+
+        .bet-choices {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .choice-card {
+            background: linear-gradient(145deg, rgba(0,0,0,0.4), rgba(0,0,0,0.2));
+            border-radius: 25px;
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .choice-card.tai {
+            background: linear-gradient(145deg, rgba(239, 68, 68, 0.2), rgba(220, 38, 38, 0.1));
+        }
+
+        .choice-card.xiu {
+            background: linear-gradient(145deg, rgba(59, 130, 246, 0.2), rgba(37, 99, 235, 0.1));
+        }
+
+        .choice-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .choice-card.active {
+            border-color: #fbbf24;
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
+        }
+
+        .choice-emoji {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .choice-title {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .choice-range {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .choice-multiplier {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(251, 191, 36, 0.3);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* History Section */
+        .history-section-modern {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .history-timeline {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 10px 0;
+            scrollbar-width: thin;
+            scrollbar-color: #fbbf24 rgba(255,255,255,0.1);
+        }
+
+        .history-timeline::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .history-timeline::-webkit-scrollbar-thumb {
+            background: #fbbf24;
+            border-radius: 10px;
+        }
+
+        .history-item-modern {
+            min-width: 60px;
+            height: 60px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .history-item-modern.tai {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+
+        .history-item-modern.xiu {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+        }
+
+        .history-result {
+            font-size: 20px;
+        }
+
+        .history-total {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        /* Bottom Navigation - Glassmorphism */
+        .bottom-nav {
+            position: fixed;
+            bottom: 16px;
+            left: 16px;
+            right: 16px;
+            max-width: 500px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 40px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-around;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #000;
+        }
+
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .nav-item span {
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* Animations */
+        @keyframes roll-3d {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            100% { transform: rotateX(720deg) rotateY(720deg); }
+        }
+
+        .rolling-3d .dice-3d {
+            animation: roll-3d 0.6s ease-out;
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 20px rgba(251, 191, 36, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(251, 191, 36, 0.6); }
+            100% { box-shadow: 0 0 20px rgba(251, 191, 36, 0.3); }
+        }
+
+        .win-effect {
+            animation: pulse-glow 0.5s ease-out;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(251, 191, 36, 0.3);
+            border-top-color: #fbbf24;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 12px 24px;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            z-index: 1000;
+            animation: slideUp 0.3s ease-out;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        @keyframes slideUp {
+            from { transform: translate(-50%, 20px); opacity: 0; }
+            to { transform: translate(-50%, 0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-orb"></div>
+    <div class="bg-orb-2"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="balance-row">
+                <div class="balance-label">
+                    <i class="fas fa-coins"></i>
+                    <span>Ví chính</span>
+                </div>
+                <div class="balance-value" id="balance">1,000,000</div>
+            </div>
+            
+            <div class="user-profile">
+                <div class="avatar" id="userAvatar">👤</div>
+                <div class="user-details">
+                    <div class="user-name" id="userName">Người chơi</div>
+                    <div class="user-id" id="userId">ID: ••••••</div>
+                </div>
+                <div class="level-badge">
+                    <i class="fas fa-crown"></i> VIP 1
+                </div>
+            </div>
+        </div>
+
+        <!-- Dice Section -->
+        <div class="dice-section" id="diceSection">
+            <div class="dice-container" id="diceContainer">
+                <!-- Dice 1 -->
+                <div class="dice-3d" id="dice1" data-value="1">
+                    <div class="face face-1"><div class="dot-3d"></div></div>
+                    <div class="face face-2"><div class="dot-3d" style="margin-top: -8px;"></div></div>
+                    <div class="face face-3"><div class="dot-3d" style="margin-bottom: -8px;"></div></div>
+                    <div class="face face-4"><div class="dot-3d" style="margin-left: -8px;"></div></div>
+                    <div class="face face-5"><div class="dot-3d" style="margin-right: -8px;"></div></div>
+                    <div class="face face-6">
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <div class="dot-3d"></div>
+                            <div class="dot-3d"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dice 2 -->
+                <div class="dice-3d" id="dice2" data-value="1">
+                    <div class="face face-1"><div class="dot-3d"></div></div>
+                    <div class="face face-2"><div class="dot-3d" style="margin-top: -8px;"></div></div>
+                    <div class="face face-3"><div class="dot-3d" style="margin-bottom: -8px;"></div></div>
+                    <div class="face face-4"><div class="dot-3d" style="margin-left: -8px;"></div></div>
+                    <div class="face face-5"><div class="dot-3d" style="margin-right: -8px;"></div></div>
+                    <div class="face face-6">
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <div class="dot-3d"></div>
+                            <div class="dot-3d"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dice 3 -->
+                <div class="dice-3d" id="dice3" data-value="1">
+                    <div class="face face-1"><div class="dot-3d"></div></div>
+                    <div class="face face-2"><div class="dot-3d" style="margin-top: -8px;"></div></div>
+                    <div class="face face-3"><div class="dot-3d" style="margin-bottom: -8px;"></div></div>
+                    <div class="face face-4"><div class="dot-3d" style="margin-left: -8px;"></div></div>
+                    <div class="face face-5"><div class="dot-3d" style="margin-right: -8px;"></div></div>
+                    <div class="face face-6">
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <div class="dot-3d"></div>
+                            <div class="dot-3d"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="total-badge">
+                <div class="total-number" id="totalScore">3</div>
+                <div class="result-badge-modern" id="resultBadge">⚡ READY</div>
+            </div>
+        </div>
+
+        <!-- Betting Controls -->
+        <div class="betting-controls">
+            <div class="section-title-modern">
+                <i class="fas fa-dice"></i>
+                <span>Đặt cược</span>
+            </div>
+
+            <!-- Amount Control -->
+            <div class="amount-control">
+                <button class="amount-btn" onclick="adjustBet(-10000)"><i class="fas fa-minus"></i></button>
+                <input type="text" class="amount-input" id="betAmount" value="10,000" readonly>
+                <button class="amount-btn" onclick="adjustBet(10000)"><i class="fas fa-plus"></i></button>
+            </div>
+
+            <!-- Quick Bets -->
+            <div class="quick-bets">
+                <button class="quick-bet-modern" onclick="setBet(10000)">10K</button>
+                <button class="quick-bet-modern" onclick="setBet(50000)">50K</button>
+                <button class="quick-bet-modern" onclick="setBet(100000)">100K</button>
+                <button class="quick-bet-modern" onclick="setBet(500000)">500K</button>
+                <button class="quick-bet-modern" onclick="setBet(1000000)">1M</button>
+                <button class="quick-bet-modern" onclick="setBet(2000000)">2M</button>
+                <button class="quick-bet-modern" onclick="setBet(5000000)">5M</button>
+                <button class="quick-bet-modern" onclick="setBet(10000000)">10M</button>
+            </div>
+
+            <!-- Bet Choices -->
+            <div class="bet-choices">
+                <div class="choice-card tai" id="taiBtn" onclick="placeBet('tai')">
+                    <div class="choice-emoji">🐉</div>
+                    <div class="choice-title">TÀI</div>
+                    <div class="choice-range">11 - 17 điểm</div>
+                    <div class="choice-multiplier">x2</div>
+                </div>
+                <div class="choice-card xiu" id="xiuBtn" onclick="placeBet('xiu')">
+                    <div class="choice-emoji">🐢</div>
+                    <div class="choice-title">XỈU</div>
+                    <div class="choice-range">4 - 10 điểm</div>
+                    <div class="choice-multiplier">x2</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- History Section -->
+        <div class="history-section-modern">
+            <div class="section-title-modern">
+                <i class="fas fa-history"></i>
+                <span>Lịch sử phiên</span>
+            </div>
+            <div class="history-timeline" id="historyTimeline">
+                <!-- History items will be added here -->
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
+            <div style="background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); border-radius: 20px; padding: 15px; text-align: center;">
+                <i class="fas fa-trophy" style="color: #fbbf24; font-size: 24px; margin-bottom: 5px;"></i>
+                <div style="font-size: 12px; color: rgba(255,255,255,0.6);">Thắng</div>
+                <div style="font-size: 24px; font-weight: 700; color: #4ade80;" id="winCount">0</div>
+            </div>
+            <div style="background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); border-radius: 20px; padding: 15px; text-align: center;">
+                <i class="fas fa-chart-line" style="color: #fbbf24; font-size: 24px; margin-bottom: 5px;"></i>
+                <div style="font-size: 12px; color: rgba(255,255,255,0.6);">Tỉ lệ</div>
+                <div style="font-size: 24px; font-weight: 700; color: #fbbf24;" id="winRate">0%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="showTab('game')">
+            <i class="fas fa-dice-d6"></i>
+            <span>Game</span>
+        </div>
+        <div class="nav-item" onclick="showTab('history')">
+            <i class="fas fa-clock"></i>
+            <span>Lịch sử</span>
+        </div>
+        <div class="nav-item" onclick="showTab('leaderboard')">
+            <i class="fas fa-crown"></i>
+            <span>Top</span>
+        </div>
+        <div class="nav-item" onclick="showTab('profile')">
+            <i class="fas fa-user"></i>
+            <span>Cá nhân</span>
+        </div>
+        <div class="nav-item" onclick="showTab('shop')">
+            <i class="fas fa-store"></i>
+            <span>Shop</span>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer"></div>
+
+    <script>
+        // Telegram Web App
+        const tg = window.Telegram.WebApp;
+        tg.expand();
+        tg.ready();
+        tg.enableClosingConfirmation();
+
+        // Game state
+        let balance = 1000000;
+        let currentBet = 10000;
+        let isRolling = false;
+        let history = JSON.parse(localStorage.getItem('taiXiuHistory')) || [];
+        let wins = parseInt(localStorage.getItem('totalWins') || '0');
+        let totalBets = parseInt(localStorage.getItem('totalBets') || '0');
+        
+        const user = tg.initDataUnsafe?.user || { first_name: 'Khách', id: '123456' };
+
+        // DOM elements
+        const balanceEl = document.getElementById('balance');
+        const betAmountEl = document.getElementById('betAmount');
+        const dice1El = document.getElementById('dice1');
+        const dice2El = document.getElementById('dice2');
+        const dice3El = document.getElementById('dice3');
+        const totalScoreEl = document.getElementById('totalScore');
+        const resultBadgeEl = document.getElementById('resultBadge');
+        const diceSection = document.getElementById('diceSection');
+        const taiBtn = document.getElementById('taiBtn');
+        const xiuBtn = document.getElementById('xiuBtn');
+        const historyTimeline = document.getElementById('historyTimeline');
+        const winCountEl = document.getElementById('winCount');
+        const winRateEl = document.getElementById('winRate');
+
+        // Initialize user
+        function initUser() {
+            document.getElementById('userName').textContent = user.first_name || 'Khách';
+            document.getElementById('userId').textContent = `ID: ${user.id?.slice(0, 6) || '••••••'}`;
+            
+            const savedBalance = localStorage.getItem(`balance_${user.id}`);
+            if (savedBalance) {
+                balance = parseInt(savedBalance);
+            }
+            
+            // Load stats
+            wins = parseInt(localStorage.getItem(`wins_${user.id}`) || '0');
+            totalBets = parseInt(localStorage.getItem(`totalBets_${user.id}`) || '0');
+            
+            updateBalance();
+            updateStats();
+            updateHistoryDisplay();
+        }
+
+        // Format number
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+
+        // Show toast
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            document.getElementById('toastContainer').appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 2000);
+        }
+
+        // Update balance
+        function updateBalance() {
+            balanceEl.textContent = formatNumber(balance);
+            localStorage.setItem(`balance_${user.id}`, balance);
+        }
+
+        // Update stats
+        function updateStats() {
+            winCountEl.textContent = wins;
+            const rate = totalBets > 0 ? Math.round((wins / totalBets) * 100) : 0;
+            winRateEl.textContent = rate + '%';
+            
+            localStorage.setItem(`wins_${user.id}`, wins);
+            localStorage.setItem(`totalBets_${user.id}`, totalBets);
+        }
+
+        // Adjust bet
+        function adjustBet(amount) {
+            let newBet = currentBet + amount;
+            if (newBet >= 1000 && newBet <= balance) {
+                currentBet = newBet;
+                betAmountEl.value = formatNumber(currentBet);
+                
+                // Haptic feedback
+                tg.HapticFeedback?.impactOccurred('light');
+            }
+        }
+
+        // Set bet
+        function setBet(amount) {
+            if (amount <= balance) {
+                currentBet = amount;
+                betAmountEl.value = formatNumber(currentBet);
+                tg.HapticFeedback?.impactOccurred('light');
+            } else {
+                showToast('Số dư không đủ!', 'error');
+                tg.HapticFeedback?.notification('error');
+            }
+        }
+
+        // Roll dice 3D
+        async function rollDice3D() {
+            return new Promise(resolve => {
+                diceSection.classList.add('rolling-3d');
+                
+                // Random values
+                const values = [
+                    Math.floor(Math.random() * 6) + 1,
+                    Math.floor(Math.random() * 6) + 1,
+                    Math.floor(Math.random() * 6) + 1
+                ];
+                
+                setTimeout(() => {
+                    diceSection.classList.remove('rolling-3d');
+                    
+                    // Update dice faces
+                    dice1El.setAttribute('data-value', values[0]);
+                    dice2El.setAttribute('data-value', values[1]);
+                    dice3El.setAttribute('data-value', values[2]);
+                    
+                    const total = values[0] + values[1] + values[2];
+                    totalScoreEl.textContent = total;
+                    
+                    resolve({
+                        values,
+                        total
+                    });
+                }, 600);
+            });
+        }
+
+        // Place bet
+        async function placeBet(choice) {
+            if (isRolling) {
+                showToast('Đang xử lý...', 'warning');
+                return;
+            }
+            
+            if (currentBet > balance) {
+                showToast('Số dư không đủ!', 'error');
+                tg.HapticFeedback?.notification('error');
+                return;
+            }
+            
+            // Start rolling
+            isRolling = true;
+            
+            // Disable buttons with style
+            taiBtn.style.opacity = '0.5';
+            xiuBtn.style.opacity = '0.5';
+            taiBtn.style.pointerEvents = 'none';
+            xiuBtn.style.pointerEvents = 'none';
+            
+            // Deduct bet
+            balance -= currentBet;
+            totalBets++;
+            updateBalance();
+            updateStats();
+            
+            // Send to bot
+            tg.sendData(JSON.stringify({
+                action: 'bet',
+                choice: choice,
+                amount: currentBet
+            }));
+            
+            // Roll dice
+            const result = await rollDice3D();
+            
+            // Determine win
+            const isWin = (choice === 'tai' && result.total >= 11 && result.total <= 17) ||
+                         (choice === 'xiu' && result.total >= 4 && result.total <= 10);
+            
+            // Show result
+            if (isWin) {
+                const winAmount = currentBet * 2;
+                balance += winAmount;
+                wins++;
+                
+                resultBadgeEl.textContent = 'THẮNG 🎉';
+                resultBadgeEl.className = `result-badge-modern ${choice}`;
+                
+                // Win effects
+                diceSection.classList.add('win-effect');
+                setTimeout(() => diceSection.classList.remove('win-effect'), 500);
+                
+                tg.HapticFeedback?.notification('success');
+                showToast(`+${formatNumber(currentBet)} VNĐ`, 'success');
+            } else {
+                resultBadgeEl.textContent = 'THUA 😢';
+                resultBadgeEl.className = `result-badge-modern ${choice}`;
+                
+                tg.HapticFeedback?.notification('error');
+                showToast(`-${formatNumber(currentBet)} VNĐ`, 'error');
+            }
+            
+            // Add to history
+            addToHistory({
+                result: isWin ? choice : (choice === 'tai' ? 'xiu' : 'tai'),
+                total: result.total,
+                isWin: isWin
+            });
+            
+            // Update stats
+            updateStats();
+            
+            // Send result to bot
+            tg.sendData(JSON.stringify({
+                action: 'result',
+                isWin: isWin,
+                amount: currentBet,
+                result: result.values,
+                total: result.total
+            }));
+            
+            // Re-enable buttons
+            setTimeout(() => {
+                isRolling = false;
+                taiBtn.style.opacity = '1';
+                xiuBtn.style.opacity = '1';
+                taiBtn.style.pointerEvents = 'auto';
+                xiuBtn.style.pointerEvents = 'auto';
+            }, 500);
+        }
+
+        // Add to history
+        function addToHistory(game) {
+            history.unshift({
+                ...game,
+                timestamp: Date.now()
+            });
+            
+            if (history.length > 30) {
+                history.pop();
+            }
+            
+            localStorage.setItem('taiXiuHistory', JSON.stringify(history));
+            updateHistoryDisplay();
+        }
+
+        // Update history display
+        function updateHistoryDisplay() {
+            historyTimeline.innerHTML = '';
+            
+            history.forEach((item, index) => {
+                if (index < 20) {
+                    const historyItem = document.createElement('div');
+                    historyItem.className = `history-item-modern ${item.result}`;
+                    
+                    const resultText = document.createElement('div');
+                    resultText.className = 'history-result';
+                    resultText.textContent = item.result === 'tai' ? 'T' : 'X';
+                    
+                    const totalText = document.createElement('div');
+                    totalText.className = 'history-total';
+                    totalText.textContent = item.total;
+                    
+                    historyItem.appendChild(resultText);
+                    historyItem.appendChild(totalText);
+                    
+                    // Add win indicator
+                    if (item.isWin) {
+                        historyItem.style.border = '2px solid #fbbf24';
+                    }
+                    
+                    historyTimeline.appendChild(historyItem);
+                }
+            });
+        }
+
+        // Show tabs
+        function showTab(tab) {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+            
+            tg.HapticFeedback?.impactOccurred('light');
+            
+            switch(tab) {
+                case 'history':
+                    showFullHistory();
+                    break;
+                case 'leaderboard':
+                    showLeaderboard();
+                    break;
+                case 'profile':
+                    showProfile();
+                    break;
+                case 'shop':
+                    showShop();
+                    break;
+            }
+        }
+
+        function showFullHistory() {
+            const historyText = history.slice(0, 10).map((item, i) => {
+                const time = new Date(item.timestamp).toLocaleTimeString();
+                return `${i+1}. ${item.result.toUpperCase()} - ${item.total} điểm ${item.isWin ? '✅' : '❌'} ${time}`;
+            }).join('\n');
+            
+            tg.showPopup({
+                title: '📜 Lịch sử chi tiết',
+                message: historyText || 'Chưa có lịch sử',
+                buttons: [{type: 'ok'}]
+            });
+        }
+
+        function showLeaderboard() {
+            tg.showPopup({
+                title: '🏆 Bảng xếp hạng',
+                message: '1. 🥇 Người chơi 1 - 10.5M\n2. 🥈 Người chơi 2 - 8.2M\n3. 🥉 Người chơi 3 - 6.7M\n...\n\nĐang cập nhật...',
+                buttons: [{type: 'ok'}]
+            });
+        }
+
+        function showProfile() {
+            const rate = totalBets > 0 ? Math.round((wins / totalBets) * 100) : 0;
+            
+            tg.showPopup({
+                title: '👤 Thông tin cá nhân',
+                message: `Tên: ${user.first_name}\nID: ${user.id}\n\n📊 Thống kê:\n• Tổng cược: ${totalBets}\n• Thắng: ${wins}\n• Tỉ lệ: ${rate}%\n• Số dư: ${formatNumber(balance)} VNĐ`,
+                buttons: [{type: 'ok'}]
+            });
+        }
+
+        function showShop() {
+            tg.showPopup({
+                title: '🛒 Cửa hàng',
+                message: '🎁 VIP 1 - 100K/tháng\n🎁 VIP 2 - 500K/tháng\n🎁 VIP 3 - 1M/tháng\n\nLiên hệ @admin để mua VIP',
+                buttons: [{type: 'ok'}]
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            initUser();
+            betAmountEl.value = formatNumber(currentBet);
+        });
+    </script>
+</body>
+</html>
